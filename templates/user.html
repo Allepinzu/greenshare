@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}User{% endblock %}</title>
+</head>
+<body>
+
+{% block content %}
+{% if user %}
+<h1> Utente bello si chiama {{ user }}</h1>
+{% endblock %}
+
+
+</body>
+</html>
