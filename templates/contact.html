@@ -9,13 +9,19 @@
 {% block content %}
 
     {{ pagename }}
-
-    <form method="POST">
-       {{ form.name.label }}
+    {% if name %}
+       Welcome {{ name }}
+    {% else %}
+       Welcome Stranger
+    {% endif %}
+    <form method="post">
+        {{ form.name.label }}
     {{form.name()}}
     {{ form.submit() }}
-
-
+    {{ form.hidden_tag() }}
+    {% for error in form.name.errors%}
+         error
+    {% endfor %}
     </form>
 
 

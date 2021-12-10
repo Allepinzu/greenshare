@@ -6,6 +6,7 @@ username = ''
 
 app.config['SECRET_KEY'] = 'hard to guess'
 
+
 @app.route('/')
 def home():  # put application's code here
     return render_template('home.html')
@@ -16,16 +17,17 @@ def user():  # put application's code here
     return render_template('user.html')
 
 
-app.config.update(dict(
-    SECRET_KEY="powerful secretkey",
-    WTF_CSRF_SECRET_KEY="a csrf secret key"
-))
+app.config['SECRET_KEY'] = 'hard to guess'
 
-@app.route('/contact')
+
+@app.route('/contact', methods=['GET', 'POST'])
 def contact_pages():
     form = ContectForm()
     pagename = "Contact Form"
-    return render_template('contact.html', pagename=pagename, form=form)
+    name = None
+    if form.validate_on_submit():
+        name = form.name.data
+    return render_template('contact.html', pagename=pagename, form=form, name=name)
 
 
 @app.route('/login', methods=["POST", "GET"])
@@ -46,4 +48,4 @@ def login():  # put application's code here
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=bool)
